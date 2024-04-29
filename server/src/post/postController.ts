@@ -2,36 +2,27 @@ import * as PostService from "./postService";
 import {Request, Response} from "express";
 
 async function getAllPosts(req: Request, res: Response) {
-    const db = "../../db/posts.json"
-    const posts = await PostService.getAllPosts(db);
-    res.status(200).json(posts);
-}
-async function getPost(req: Request, res: Response) {
-    const db = "../../db/posts.json"
-    const postId = parseInt(req.params.id);
-    const posts = await PostService.getPost(db, postId);
+    const posts = await PostService.getAllPosts();
     res.status(200).json(posts);
 }
 async function createPost(req: Request, res: Response) {
-    const db = "../../db/posts.json"
     const post = req.body;
-    const posts = await PostService.createPost(db, post);
+    const posts = await PostService.createPost(post);
     res.status(200).json(posts);
 }
 async function updatePost(req: Request, res: Response) {
-    const db = "../../db/posts.json"
-    const posts = await PostService.updatePost(db);
+    const post = req.body;
+    const posts = await PostService.updatePost(post);
     res.status(200).json(posts);
 }
 async function deletePost(req: Request, res: Response) {
-    const db = "../../db/posts.json"
-    const posts = await PostService.deletePost(db);
+    const post = req.body;
+    const posts = await PostService.deletePost(post.id);
     res.status(200).json(posts);
 }
 
 export {
     getAllPosts,
-    getPost,
     createPost,
     updatePost,
     deletePost

@@ -1,9 +1,10 @@
 import {IUserResponse} from "./userInterface";
-import {dbType} from "../types";
+import FileHelpers from "../utils/fileHelpers";
+import {usersDB as db} from "../../config";
 
-export async function getAllUsers(db:dbType): Promise<IUserResponse[]> {
+export async function getAllUsers(): Promise<IUserResponse[]> {
     try {
-        const users = await import(db)
+        const users = await FileHelpers.readJsonFile(db)
         return <IUserResponse[]>users
     } catch (err: unknown) {
         if (err instanceof Error) {

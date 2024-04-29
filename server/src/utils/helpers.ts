@@ -1,9 +1,10 @@
-
 //***********************************************************
 // Generate a unique post id  for new posts
 // based on date and userId
 //***********************************************************
-export function generateUniqueId({ userId, date }) {
+import {IPostRequest} from "../post/postInterface";
+
+export function generateUniqueId({ userId, date }: IPostRequest) {
     const timestamp = new Date(date).getTime();
 
     // Assuming userId is not longer than 6 digits
@@ -14,4 +15,4 @@ export function generateUniqueId({ userId, date }) {
 //**********************************************************
 // Test if an object is empty
 //**********************************************************
-export const isEmpty = obj => Object.keys(obj).length === 0;
+export const isEmpty = (obj:any) => Object.keys(obj).length === 0;

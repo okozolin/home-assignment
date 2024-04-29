@@ -1,10 +1,11 @@
 import {IPostRequest, IPostResponse} from "./postInterface";
-import {dbType} from "../types";
 import {generateUniqueId} from "../utils/helpers";
+import FileHelpers from "../utils/fileHelpers";
+import {postsDB as db} from "../../config";
 
-async function getAllPosts(db:dbType): Promise<IPostResponse[]> {
+async function getAllPosts(): Promise<IPostResponse[]> {
     try {
-        const posts = await import(db)
+        const posts = await FileHelpers.readJsonFile(db)
         return <IPostResponse[]>posts
     } catch (err: unknown) {
         if (err instanceof Error) {
@@ -16,46 +17,45 @@ async function getAllPosts(db:dbType): Promise<IPostResponse[]> {
     }
 }
 
-async function createPost(db:dbType, post: IPostRequest ): Promise<IPostResponse[]> {
+async function createPost(post: IPostRequest ): Promise<IPostResponse> {
     try {
-        const posts = await getAllPosts(db)
         const newPostId = generateUniqueId(post)
         const newPost = {...post, id: newPostId}
-        const updated = await updateFile(newPost)
-        return <IPostResponse[]>updated
+        await FileHelpers.create(db, newPost)
+        return <IPostResponse>newPost
     } catch (err: unknown) {
         if (err instanceof Error) {
             console.error(`Error getting posts`, err.message);
         } else {
             console.error(`An unexpected error occurred`, err);
         }
-        return <IPostResponse[]>[]
+        return <IPostResponse>{}
     }
 }
-async function updatePost(db:dbType): Promise<IPostResponse[]> {
+async function updatePost(post: IPostResponse): Promise<IPostResponse> {
     try {
-        const posts = await import(db)
-        return <IPostResponse[]>posts
+        await FileHelpers.update(db, post)
+        return <IPostResponse>post
     } catch (err: unknown) {
         if (err instanceof Error) {
             console.error(`Error getting posts`, err.message);
         } else {
             console.error(`An unexpected error occurred`, err);
         }
-        return <IPostResponse[]>[]
+        return <IPostResponse>{}
     }
 }
-async function deletePost(db:dbType): Promise<IPostResponse[]> {
+async function deletePost(post: IPostResponse): Promise<Boolean> {
     try {
-        const posts = await import(db)
-        return <IPostResponse[]>posts
+        await FileHelpers.delete(db, post.id)
+        return true
     } catch (err: unknown) {
         if (err instanceof Error) {
             console.error(`Error getting posts`, err.message);
         } else {
             console.error(`An unexpected error occurred`, err);
         }
-        return <IPostResponse[]>[]
+        return false
     }
 }
 
