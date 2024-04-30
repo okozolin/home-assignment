@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 import { Header } from "./components";
-import { PostData, UserData } from "./types";
+import { PostData } from "./types";
 import usePosts from "./hooks/usePosts";
-import useUsers from "./hooks/useUsers.ts";
+
 
 function App() {
   // const [users, setUsers] = useState<UserData[]>([]);

@@ -1,12 +1,12 @@
 import {IPostRequest, IPostResponse} from "./postInterface";
-import {generateUniqueId} from "../utils/helpers";
+import {generateUniqueId, sortPostsByDate} from "../utils/helpers";
 import FileHelpers from "../utils/fileHelpers";
 import {postsDB as db} from "../../config";
 
 async function getAllPosts(): Promise<IPostResponse[]> {
     try {
-        const posts = await FileHelpers.readJsonFile(db)
-        return <IPostResponse[]>posts
+        const posts = await FileHelpers.readJsonFile(db) as IPostResponse[]
+        return <IPostResponse[]>sortPostsByDate(posts)
     } catch (err: unknown) {
         if (err instanceof Error) {
             console.error(`Error getting posts`, err.message);
