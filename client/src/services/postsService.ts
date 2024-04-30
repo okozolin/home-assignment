@@ -1,4 +1,3 @@
-// /services/postsService.ts
 import apiClient from '../api/apiClient';
 import { PostData } from '../types';
 

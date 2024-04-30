@@ -34,8 +34,16 @@ export const PostsProvider = ({ children }) => {
         dispatch({ type: LIKE_POST, payload: like });
     };
 
+    const value = {
+        ...state,
+        setPosts,
+        addPost,
+        updatePost,
+        deletePost,
+        likePost
+    }
     return (
-        <PostsContext.Provider value={{ ...state, setPosts, addPost, updatePost, deletePost, likePost }}>
+        <PostsContext.Provider value={value}>
             {children}
         </PostsContext.Provider>
     );
