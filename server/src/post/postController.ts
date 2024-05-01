@@ -16,9 +16,12 @@ async function updatePost(req: Request, res: Response) {
     res.status(200).json(posts);
 }
 async function deletePost(req: Request, res: Response) {
-    const post = req.body;
-    const posts = await PostService.deletePost(post.id);
-    res.status(200).json(posts);
+    const postId = req.params.id;
+    const response = await PostService.deletePost(Number(postId));
+    if (response)
+        res.status(200).json(postId);
+    else
+        res.status(500).json(postId);
 }
 
 export {

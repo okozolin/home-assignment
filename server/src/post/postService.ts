@@ -45,9 +45,9 @@ async function updatePost(post: IPostResponse): Promise<IPostResponse> {
         return <IPostResponse>{}
     }
 }
-async function deletePost(post: IPostResponse): Promise<Boolean> {
+async function deletePost(postId: number): Promise<Boolean> {
     try {
-        await FileHelpers.delete(db, post.id)
+        await FileHelpers.delete(db, postId)
         return true
     } catch (err: unknown) {
         if (err instanceof Error) {
