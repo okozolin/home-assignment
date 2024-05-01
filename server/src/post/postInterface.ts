@@ -7,7 +7,7 @@ export interface IPostRequest {
     date: string,
     content: string,
     imageUrl?: string
-    like: ILike
+    likes: ILike
 }
 export interface IPostResponse extends IPostRequest {
     id: number

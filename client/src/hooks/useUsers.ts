@@ -12,11 +12,17 @@ const useUsers = ( userId? : number) => {
         }, {});
     }, [users]);
 
+    const getUserNamesByIds = (ids: number[]): string[] => {
+        const filteredUsers = users.filter(user => ids.includes(user.id));
+        return filteredUsers.map(user => user.name);
+    }
+
     const user: UserData = userId && usersById ? usersById[userId] : undefined
     return {
         user,
         users,
-        activeUser
+        activeUser,
+        getUserNamesByIds
     }
 
 };

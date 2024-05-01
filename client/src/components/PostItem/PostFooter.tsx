@@ -1,4 +1,4 @@
-import {Box, CardActions, IconButton, Badge} from "@mui/material";
+import {Box, CardActions, IconButton, Badge, Tooltip} from "@mui/material";
 import {
     Delete,
     Edit,
@@ -9,6 +9,7 @@ import {PostData} from "../../types.ts";
 import useUsers from "../../hooks/useUsers.ts";
 import {useState} from "react";
 import {ConfirmationDialog} from "../ConfirmationDialog";
+import ConditionalTooltip from "../ConditionalTooltip/ConditionalTooltip.tsx";
 
 const PostFooter: React.FC<{ post: PostData }> = ({ post }) => {
     const {
@@ -17,7 +18,7 @@ const PostFooter: React.FC<{ post: PostData }> = ({ post }) => {
         removePost,
         toggleLikePost
         } = usePosts();
-    const { activeUser } = useUsers()
+    const { activeUser, getUserNamesByIds } = useUsers()
     const [openDialog, setOpenDialog] = useState(false);
 
     const onConfirmDelete = () => {
@@ -57,7 +58,18 @@ const PostFooter: React.FC<{ post: PostData }> = ({ post }) => {
             }
             </Box>
             <Box>
-                <IconButton onClick={onLike}>
+                 <ConditionalTooltip
+                    title={
+                     post.likes.userIds.length ? (
+                         <div style={{ whiteSpace: 'pre-line' }}>
+                             {getUserNamesByIds(post.likes.userIds).join('\n')}
+                         </div>)
+                            : null
+                    }
+                    placement="top"
+                    arrow
+                >
+                    <IconButton onClick={onLike}>
                     <Badge
                         badgeContent={post?.likes?.count}
                         color="primary"
@@ -76,6 +88,7 @@ const PostFooter: React.FC<{ post: PostData }> = ({ post }) => {
                         <ThumbUp color={'primary'}/>
                     </Badge>
                 </IconButton>
+                </ConditionalTooltip>
             </Box>
         </CardActions>
         <ConfirmationDialog

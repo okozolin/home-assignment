@@ -6,7 +6,11 @@ import {postsDB as db} from "../../config";
 async function getAllPosts(): Promise<IPostResponse[]> {
     try {
         const posts = await FileHelpers.readJsonFile(db) as IPostResponse[]
-        return <IPostResponse[]>sortPostsByDate(posts)
+        const fillPosts = posts.map(post => ({
+            ...post,
+            likes: post.likes || { count: 0, userIds: [] }
+        }));
+        return <IPostResponse[]>sortPostsByDate(fillPosts)
     } catch (err: unknown) {
         if (err instanceof Error) {
             console.error(`Error getting posts`, err.message);
