@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import { Header } from "./components";
 import { PostData } from "./types";
 import usePosts from "./hooks/usePosts";
+import { PostItem } from "./components/PostItem";
 
 
 function App() {
@@ -22,8 +23,8 @@ function App() {
       <div className="posts-wrapper">
           {posts && posts.length &&
               posts.map((post: PostData) => (
-              <div key={post.id}>{post.id} {post.content}</div>
-              // <PostItem key={post.id} post={post} />
+              // <div key={post.id}>{post.id} {post.content}</div>
+              <PostItem key={post.id} post={post} />
           ))}
       </div>
     </>
