@@ -30,8 +30,8 @@ export const PostsProvider = ({ children }) => {
     const deletePost = postId => {
         dispatch({ type: DELETE_POST, payload: postId });
     };
-    const likePost = like => {
-        dispatch({ type: LIKE_POST, payload: like });
+    const likePost = post => {
+        dispatch({ type: LIKE_POST, payload: post });
     };
 
     const value = {

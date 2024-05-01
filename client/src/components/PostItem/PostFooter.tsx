@@ -15,7 +15,8 @@ const PostFooter: React.FC<{ post: PostData }> = ({ post }) => {
         addNewPost,
         updateExistingPost,
         removePost,
-        toggleLikePost } = usePosts();
+        toggleLikePost
+        } = usePosts();
     const { activeUser } = useUsers()
     const [openDialog, setOpenDialog] = useState(false);
 
@@ -37,6 +38,7 @@ const PostFooter: React.FC<{ post: PostData }> = ({ post }) => {
     }
     const onLike = () => {
         console.log("clicked Like for active user", activeUser.name)
+        toggleLikePost(post, activeUser.id)
     }
 
     return (
@@ -57,7 +59,7 @@ const PostFooter: React.FC<{ post: PostData }> = ({ post }) => {
             <Box>
                 <IconButton onClick={onLike}>
                     <Badge
-                        badgeContent={post.likes}
+                        badgeContent={post?.likes?.count}
                         color="primary"
                         anchorOrigin={{
                             vertical: 'top',

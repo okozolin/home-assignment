@@ -17,8 +17,5 @@ const deletePost = async (postId: string) => {
     return await apiClient.delete(`/posts/${postId}`);
 };
 
-const likePost = async (postId: string, userId: string) => {
-    return await apiClient.put(`/posts/like/${postId}`, {userId});
-};
 
-export { fetchPosts, createPost, updatePost, deletePost, likePost };
+export { fetchPosts, createPost, updatePost, deletePost };
