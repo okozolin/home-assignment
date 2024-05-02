@@ -1,11 +1,11 @@
 import apiClient from '../api/apiClient';
-import { PostData } from '../types';
+import {NewPostData, PostData} from '../types';
 
 const fetchPosts = async () => {
     return await apiClient.get('/posts');
 };
 
-const createPost = async (post: PostData) => {
+const createPost = async (post: NewPostData) => {
     return await apiClient.post('/posts', post);
 };
 

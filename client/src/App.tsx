@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import { Header } from "./components";
+import {Header, PostEditor} from "./components";
 import { PostData } from "./types";
 import usePosts from "./hooks/usePosts";
 import { PostItem } from "./components/PostItem";
@@ -12,6 +12,7 @@ function App() {
   const { posts, loadPosts } = usePosts();
 
   const openEditor = () => setIsPostEditorOpen(true);
+  const closeEditor = () => setIsPostEditorOpen(false);
 
     useEffect(() => {
         loadPosts()
@@ -27,6 +28,7 @@ function App() {
               <PostItem key={post.id} post={post} />
           ))}
       </div>
+        {isPostEditorOpen && <PostEditor closeEditor={closeEditor}/>}
     </>
   );
 }

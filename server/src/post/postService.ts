@@ -29,7 +29,7 @@ async function createPost(post: IPostRequest ): Promise<IPostResponse> {
         return <IPostResponse>newPost
     } catch (err: unknown) {
         if (err instanceof Error) {
-            console.error(`Error getting posts`, err.message);
+            console.error(`Error creating a new post`, err.message);
         } else {
             console.error(`An unexpected error occurred`, err);
         }
@@ -42,7 +42,7 @@ async function updatePost(post: IPostResponse): Promise<IPostResponse> {
         return <IPostResponse>post
     } catch (err: unknown) {
         if (err instanceof Error) {
-            console.error(`Error getting posts`, err.message);
+            console.error(`Error updating a post`, err.message);
         } else {
             console.error(`An unexpected error occurred`, err);
         }

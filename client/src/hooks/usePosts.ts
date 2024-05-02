@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { PostsContext } from '../context/posts/PostsContext';
 import * as postsService from '../services/postsService';
-import {PostData} from "../types.ts";
+import {NewPostData, PostData} from "../types.ts";
 
 const usePosts = () => {
     const { posts, setPosts, addPost, updatePost, deletePost, likePost } = useContext(PostsContext);
@@ -15,9 +15,14 @@ const usePosts = () => {
         }
     };
 
-    const addNewPost = async (post: PostData) => {
-        const newPost = await postsService.createPost(post);
-        addPost(newPost);
+    const addNewPost = async (post: NewPostData) => {
+        try {
+            const newPost = await postsService.createPost(post);
+            addPost(newPost);
+            return true
+        } catch (err) {
+            console.error('Failed to create new post:', err);
+        }
     };
 
     const updateExistingPost = async (postId: number, updatedPost: PostData) => {

@@ -7,13 +7,13 @@ async function getAllPosts(req: Request, res: Response) {
 }
 async function createPost(req: Request, res: Response) {
     const post = req.body;
-    const posts = await PostService.createPost(post);
-    res.status(200).json(posts);
+    const newPost = await PostService.createPost(post);
+    res.status(200).json(newPost);
 }
 async function updatePost(req: Request, res: Response) {
     const post = req.body;
-    const posts = await PostService.updatePost(post);
-    res.status(200).json(posts);
+    const updatedPost = await PostService.updatePost(post);
+    res.status(200).json(updatedPost);
 }
 async function deletePost(req: Request, res: Response) {
     const postId = req.params.id;
