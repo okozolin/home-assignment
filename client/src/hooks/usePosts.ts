@@ -1,10 +1,18 @@
-import { useContext } from 'react';
+import {useContext, useState} from 'react';
 import { PostsContext } from '../context/posts/PostsContext';
 import * as postsService from '../services/postsService';
 import {NewPostData, PostData} from "../types.ts";
 
 const usePosts = () => {
-    const { posts, setPosts, addPost, updatePost, deletePost, likePost } = useContext(PostsContext);
+    const { posts,
+        setPosts,
+        addPost,
+        updatePost,
+        deletePost,
+        likePost,
+        editorMode,
+        setEditorMode } = useContext(PostsContext);
+
 
     const loadPosts = async () => {
         try {
@@ -56,6 +64,8 @@ const usePosts = () => {
         updateExistingPost,
         removePost,
         toggleLikePost,
+        editorMode,
+        setEditorMode
     };
 };
 

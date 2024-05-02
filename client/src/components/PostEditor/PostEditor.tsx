@@ -17,10 +17,12 @@ type PostEditorProps = {
 };
 
 export const PostEditor: React.FC<PostEditorProps> = ({ closeEditor }) => {
-  const [content, setContent] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-  const { addNewPost } = usePosts();
-  const { activeUser } = useUsers()
+    const { addNewPost, updateExistingPost, editorMode, setEditorMode } = usePosts();
+    const { activeUser } = useUsers()
+
+    const [content, setContent] = useState<string>(editorMode?.content || '');
+    const [imageUrl, setImageUrl] = useState<string>(editorMode?.imageUrl ||'');
+
 
   const onSubmit = async () => {
     if (!content) {
@@ -28,24 +30,37 @@ export const PostEditor: React.FC<PostEditorProps> = ({ closeEditor }) => {
       return;
     }
 
-    const newPost: NewPostData = {
-      userId: activeUser.id,
-      content,
-      date: new Date().toISOString(),
-      imageUrl,
-      likes: {
-        count: 0,
-        userIds: []
-      }
-    };
 
-    const added = await addNewPost(newPost);
-    if (added) {
+    if (!editorMode) {
+        const added = await addNewPost({
+            userId: activeUser.id,
+            content,
+            date: new Date().toISOString(),
+            imageUrl,
+            likes: {
+                count: 0,
+                userIds: []
+            }
+        });
+        if (added) {
+            alert('Post added successfully');
+        }
+    }
+    else {
+        const updated = await updateExistingPost(editorMode.id,  {
+            ...editorMode,
+            content,
+            date: new Date().toISOString(),
+            imageUrl,
+        });
+        if (updated) {
+            alert('Post updated successfully');
+        }
+    }
       setContent('');
       setImageUrl('');
-      alert('Post added successfully');
+      setEditorMode(null)
       closeEditor()
-    }
   };
 
   const onCancel = () => {
@@ -56,7 +71,7 @@ export const PostEditor: React.FC<PostEditorProps> = ({ closeEditor }) => {
 
     return (
         <Dialog open={true} onClose={closeEditor} fullWidth maxWidth="sm">
-            <DialogTitle>Share your ideas, create new post</DialogTitle>
+            <DialogTitle>Share your ideas, {editorMode ? "Update your post" : "create new post"}</DialogTitle>
             <DialogContent>
                 <TextField
                     label="Content"

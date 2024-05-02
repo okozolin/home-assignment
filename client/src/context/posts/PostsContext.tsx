@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react';
+import {createContext, useReducer, useState} from 'react';
 import { postsReducer } from './postsReducer.ts';
 import {
     SET_POSTS,
@@ -7,6 +7,7 @@ import {
     DELETE_POST,
     LIKE_POST
 } from "./postsActions.ts";
+import {PostData} from "../../types.ts";
 
 const initialState = {
     posts: [],
@@ -16,7 +17,7 @@ export const PostsContext = createContext(initialState);
 
 export const PostsProvider = ({ children }) => {
     const [state, dispatch] = useReducer(postsReducer, initialState, (init)=> init);
-
+    const [editorMode, setEditorMode] = useState<PostData>(null as PostData)
     // Actions
     const setPosts = postsData => {
         dispatch({ type: SET_POSTS, payload: postsData });
@@ -40,7 +41,9 @@ export const PostsProvider = ({ children }) => {
         addPost,
         updatePost,
         deletePost,
-        likePost
+        likePost,
+        editorMode,
+        setEditorMode
     }
     return (
         <PostsContext.Provider value={value}>

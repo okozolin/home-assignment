@@ -24,13 +24,11 @@ function App() {
       <div className="posts-wrapper">
           {posts && posts.length &&
               posts.map((post: PostData) => (
-              // <div key={post.id}>{post.id} {post.content}</div>
-              <PostItem key={post.id} post={post} />
+                <PostItem key={post.id} post={post} openEditor={openEditor}/>
           ))}
       </div>
         {isPostEditorOpen && <PostEditor closeEditor={closeEditor}/>}
     </>
   );
 }
-
 export default App;

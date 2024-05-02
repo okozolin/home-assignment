@@ -7,32 +7,39 @@ import {PostData} from "../../types.ts";
 import PostHeader from "./PostHeader.tsx";
 import "./styles.css";
 import PostFooter from "./PostFooter.tsx";
-export const PostItem: React.FC<{ post: PostData }> = ({ post }) => (
-    <Card
-        className="post-item"
-        sx={{
-            boxShadow: 'none'
-        }}
-    >
-        <PostHeader post={post} />
 
-        {post.imageUrl && (
-            <CardMedia
-                sx={{
-                    height: 400,
-                    width: '100%',
-                    objectFit: 'contain',
-                }}
-                component="img"
-                // height="140"
-                image={post.imageUrl}
-                alt="Post image"
-            />
-        )}
+interface PostItemProps {
+    post: PostData,
+    openEditor: () => void
+}
+export const PostItem: React.FC<PostItemProps> = ({ post , openEditor}) => {
 
-        <CardContent>
-            <p>{post.content}</p>
-        </CardContent>
-        <PostFooter post={post} />
-    </Card>
-);
+    return (
+        <Card
+            className="post-item"
+            sx={{
+                boxShadow: 'none'
+            }}
+        >
+            <PostHeader post={post} />
+
+            {post.imageUrl && (
+                <CardMedia
+                    sx={{
+                        height: 400,
+                        width: '100%',
+                        objectFit: 'contain',
+                    }}
+                    component="img"
+                    image={post.imageUrl}
+                    alt="Post image"
+                />
+            )}
+
+            <CardContent>
+                <p>{post.content}</p>
+            </CardContent>
+            <PostFooter post={post} openEditor={openEditor}/>
+        </Card>
+    );
+}

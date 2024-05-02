@@ -11,15 +11,18 @@ import {useState} from "react";
 import {ConfirmationDialog} from "../ConfirmationDialog";
 import ConditionalTooltip from "../ConditionalTooltip/ConditionalTooltip.tsx";
 
-const PostFooter: React.FC<{ post: PostData }> = ({ post }) => {
+interface PostFooterProps {
+    post: PostData,
+    openEditor: () => void
+}
+const PostFooter: React.FC<PostFooterProps> = ({ post, openEditor }) => {
     const {
-        addNewPost,
-        updateExistingPost,
         removePost,
-        toggleLikePost
+        toggleLikePost,
         } = usePosts();
     const { activeUser, getUserNamesByIds } = useUsers()
     const [openDialog, setOpenDialog] = useState(false);
+    const { setEditorMode } = usePosts()
 
     const onConfirmDelete = () => {
         setOpenDialog(false);
@@ -31,14 +34,13 @@ const PostFooter: React.FC<{ post: PostData }> = ({ post }) => {
     };
 
     const onDelete = () => {
-        console.log("clicked delete for active user", activeUser.name)
         setOpenDialog(true)
     }
     const onEdit = () => {
-        console.log("clicked edit for active user", activeUser.name)
+        setEditorMode(post)
+        openEditor()
     }
     const onLike = () => {
-        console.log("clicked Like for active user", activeUser.name)
         toggleLikePost(post, activeUser.id)
     }
 
@@ -99,5 +101,4 @@ const PostFooter: React.FC<{ post: PostData }> = ({ post }) => {
     </>
     )
 };
-
 export default PostFooter
