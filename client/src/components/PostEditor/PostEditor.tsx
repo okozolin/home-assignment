@@ -9,7 +9,6 @@ import {
 } from '@mui/material';
 import "./styles.css";
 import usePosts from "../../hooks/usePosts.ts";
-import { NewPostData } from "../../types.ts";
 import useUsers from "../../hooks/useUsers.ts";
 
 type PostEditorProps = {
