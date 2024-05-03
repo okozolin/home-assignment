@@ -1,18 +1,25 @@
-import React, { createContext, useEffect, useReducer } from 'react';
+import {createContext, ReactNode, useEffect, useReducer} from 'react';
 import { usersReducer } from './usersReducer.ts';
-import * as usersService from '../../services/usersService.ts'; // Assuming this is the correct path
-import { SET_ACTIVE_USER, SET_USERS } from "./usersActions.ts";
-import {generateRandomId} from "../../utils/utils.ts";
+import * as usersService from '../../services/usersService';
+import { SET_ACTIVE_USER, SET_USERS } from "./usersActions";
+import {generateRandomId} from "../../utils/utils";
+import {UserData} from "../../types";
 
 let getRandomId;
-const initialState = {
+
+
+const initialState :State = {
     users: [],
     activeUser: undefined,
 };
 
 export const UsersContext = createContext(initialState);
 
-export const UsersProvider: React.FC = ({ children }) => {
+interface UserProviderProps {
+    children: ReactNode;
+}
+
+export const UsersProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [state, dispatch] = useReducer(usersReducer, initialState, (init)=> init);
 
     const loadUsers = async () => {

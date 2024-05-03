@@ -159,7 +159,15 @@
     "id": 1025,
     "userId": 8,
     "date": "1999-12-26T20:07:05.866Z",
-    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. At, si voluptas esset bonum, desideraret. Apparet statim, quae sint officia, quae actiones. Bork Ego vero volo in virtute vim esse quam maximam; Duo Reges: constructio interrete. Quare ad ea primum, si videtur; Tu vero, inquam, ducas licet, si sequetur;"
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. At, si voluptas esset bonum, desideraret. Apparet statim, quae sint officia, quae actiones. Bork Ego vero volo in virtute vim esse quam maximam; Duo Reges: constructio interrete. Quare ad ea primum, si videtur; Tu vero, inquam, ducas licet, si sequetur;",
+    "likes": {
+      "count": 3,
+      "userIds": [
+        6,
+        9,
+        7
+      ]
+    }
   },
   {
     "id": 1026,
@@ -195,7 +203,11 @@
     "id": 1031,
     "userId": 5,
     "date": "1999-12-17T09:55:31.113Z",
-    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. An vero, inquit, quisquam potest probare, quod perceptfum, quod. Respondeat totidem verbis. Non est ista, inquam, Piso, magna dissensio. Simus igitur contenti his. Sed quot homines, tot sententiae; Duo Reges: constructio interrete."
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. An vero, inquit, quisquam potest probare, quod perceptfum, quod. Respondeat totidem verbis. Non est ista, inquam, Piso, magna dissensio. Simus igitur contenti his. Sed quot homines, tot sententiae; Duo Reges: constructio interrete.",
+    "likes": {
+      "count": 0,
+      "userIds": []
+    }
   },
   {
     "id": 1032,
@@ -303,6 +315,12 @@
     "id": 1049,
     "userId": 10,
     "date": "1999-10-30T00:06:56.182Z",
-    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hunc vos beatum; Cyrenaici quidem non recusant; Zenonis est, inquam, hoc Stoici. Bork"
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hunc vos beatum; Cyrenaici quidem non recusant; Zenonis est, inquam, hoc Stoici. Bork",
+    "likes": {
+      "count": 1,
+      "userIds": [
+        4
+      ]
+    }
   }
 ]

@@ -1,8 +1,8 @@
 
-interface Items {
+interface Item {
     [key: string]: any
 }
-function extractIds(items: Items) : number[] {
+function extractIds(items: Item[]) : number[] {
     return items.map(item => item.id)
 }
 
@@ -10,7 +10,7 @@ function randomizeIds(ids: number[]) : number[] {
     return ids.sort(() => Math.random() - 0.5)
 }
 
-export const generateRandomId = (items: Items[]) => {
+export const generateRandomId = (items: Item[]) => {
     let remainingIds = extractIds(items)
 
     return () => {
@@ -29,7 +29,7 @@ export function generateRandomColor(): string {
 }
 
 export function generateInitials(name: string): string {
-    if (!name) return
+    if (!name) return ""
 
     const words = name.split(' ');
     if (words.length === 1) {

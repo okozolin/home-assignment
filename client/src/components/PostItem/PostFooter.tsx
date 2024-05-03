@@ -9,7 +9,7 @@ import {PostData} from "../../types.ts";
 import useUsers from "../../hooks/useUsers.ts";
 import {useState} from "react";
 import {ConfirmationDialog} from "../ConfirmationDialog";
-import ConditionalTooltip from "../ConditionalTooltip/ConditionalTooltip.tsx";
+import {ConditionalTooltip} from "../ConditionalTooltip";
 
 interface PostFooterProps {
     post: PostData,
@@ -41,8 +41,11 @@ const PostFooter: React.FC<PostFooterProps> = ({ post, openEditor }) => {
         openEditor()
     }
     const onLike = () => {
-        toggleLikePost(post, activeUser.id)
+        toggleLikePost(post, activeUser?.id ?? 0)
     }
+
+
+    const renderTitle = post.likes.userIds.length ? getUserNamesByIds(post.likes.userIds).join('\n') : null
 
     return (
         <>

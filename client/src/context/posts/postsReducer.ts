@@ -1,6 +1,13 @@
-import {SET_POSTS, ADD_POST, UPDATE_POST, DELETE_POST, LIKE_POST } from './postsActions.ts';
+import {
+    SET_POSTS,
+    ADD_POST,
+    UPDATE_POST,
+    DELETE_POST,
+    LIKE_POST
+} from './postsActions.ts';
+import { PostsActions, PostsState } from "./postsInterface";
 
-export const postsReducer = (state, action) => {
+export const postsReducer = (state: PostsState, action: PostsActions) => {
     switch (action.type) {
         case SET_POSTS:
             return { ...state, posts: action.payload };

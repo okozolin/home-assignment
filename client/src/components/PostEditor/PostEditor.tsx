@@ -32,7 +32,7 @@ export const PostEditor: React.FC<PostEditorProps> = ({ closeEditor }) => {
 
     if (!editorMode) {
         const added = await addNewPost({
-            userId: activeUser.id,
+            userId: activeUser?.id ?? 0,
             content,
             date: new Date().toISOString(),
             imageUrl,
@@ -46,20 +46,18 @@ export const PostEditor: React.FC<PostEditorProps> = ({ closeEditor }) => {
         }
     }
     else {
-        const updated = await updateExistingPost(editorMode.id,  {
+        await updateExistingPost(editorMode.id,  {
             ...editorMode,
             content,
             date: new Date().toISOString(),
             imageUrl,
         });
-        if (updated) {
-            alert('Post updated successfully');
-        }
+        alert('Post updated successfully');
     }
-      setContent('');
-      setImageUrl('');
-      setEditorMode(null)
-      closeEditor()
+    setContent('');
+    setImageUrl('');
+    setEditorMode(null)
+    closeEditor()
   };
 
   const onCancel = () => {
